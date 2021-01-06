@@ -1,37 +1,42 @@
-## Welcome to GitHub Pages
+# WSL 2(Windows Subsystem for Linux 2)
 
-You can use the [editor on GitHub](https://github.com/tammo1004/tammo1004.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+## 1. PowerShell(관리자)
+```
+$ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## 2. 재부팅
 
-### Jekyll Themes
+## 3. 가상 머신 플랫폼 옵션 사용: PowerShell(관리지)
+```
+$ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/tammo1004/tammo1004.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## 4. 리눅스 커널 업데이트 패키지
+https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
-### Support or Contact
+## 5. 재부팅
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## 6. WSL2를 기본 버전으로 설정: PowerShell
+```
+$ wsl --set-default-version 2
+```
+
+## 7. 리눅스 배포판 설치: Microsoft 스토어
+Ubuntu 20.04. LTS
+
+# 8. Ubuntu 20.04. LTS
+Enter new UNIX username: pc
+New password:
+
+```
+$ sudo apt update && sudo apt upgrade
+```
+
+## 9. 배포 버전을 WSL2로 설정
+```
+$ wsl --list --verbose
+  NAME            STATE           VERSION
+* Ubuntu-20.04    Stopped         2
+$ wsl --set-default-version 2
+```
