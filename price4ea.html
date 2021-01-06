@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+
+<style type="text/css">
+body {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    padding: 0px;
+    font-family: 'Malgun Gothic';
+    font-size: 10pt;
+    line-height: 20px;
+}
+
+#container {
+    width: 770px;
+    margin: 3px;
+    padding: 0px;
+    border: 0px solid #ffffff;
+}
+
+#header {
+    width: 741px;
+    margin: 0px;
+    padding: 5px 10px 5px 10px;
+    border: 1px solid #6aafe6;
+    background-color: #79a8a9;
+}
+
+#content1, #content2 {
+    width: 230px;
+    margin: 0px 3px 0px 0px;
+    padding: 5px 10px 5px 10px;
+    float: left;
+    border-left: 1px solid #7f9eb2;
+    border-right: 1px solid #7f9eb2;
+    background-color: #f4f7f7;
+}
+
+#content3 {
+    width: 230px;
+    margin: 0px;
+    padding: 5px 10px 5px 10px;
+    float: left;
+    border-left: 1px solid #7f9eb2;
+    border-right: 1px solid #7f9eb2;
+    background-color: #f4f7f7;
+}
+
+#total {
+    margin: 3px 5px 3px 5px;
+    padding: 3px;
+    width: 195px;
+    border: 1px solid #999999;
+    background-color: #ffffff;
+    text-align: right;
+}
+
+#price1, #price2, #price3, #unit11, #unit12, #unit21, #unit22, #unit31, #unit32 {
+    margin: 3px 5px 3px 5px;
+    padding: 3px;
+    width: 130px;
+    border: 1px solid #999999;
+    background-color: #ffffff;
+    text-align: right;
+}
+
+#button1, #button2, #button3 {
+    margin: 3px 5px 3px 5px;
+    padding: 3px;
+    width: 220px;
+    border: 1px solid #999999;
+    background-color: #aacfd0;
+}
+
+textarea {
+    width: 225px;
+    height: 300px;
+    background-color: #d4dfe6;
+}
+
+#result1, #result2, #result3 {
+    width: 200px;
+    height: 10px;
+}
+
+table {
+    border: 1px solid #999999;
+    width: 225px;
+}
+
+td {
+    border: 1px solid #999999;
+    text-align: right;
+    margin: 0px;
+    padding: 3px 5px 3px 5px;
+}
+</style>
+
+<script>
+function base() {
+    document.querySelector("#total").focus();
+    document.querySelector("#total").select();
+}
+
+function makecomma(c) {
+    var x = document.querySelector("#"+c).value;
+    x = x.replace(/[^0-9]/g, '');
+    x = x.replace(/,/g, '');
+    document.querySelector("#"+c).value = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function removecomma(c) {
+    return parseInt(c.replace(/,/g,""), 10);
+}
+
+function maketotal() {
+    total = document.querySelector("#total").value;
+    if (parseInt(total, 10) == 0 || parseInt(total, 10) == "" || isNaN(parseInt(total, 10))) {
+        alert('총액을 입력해 주세요');
+        document.querySelector("#total").focus();
+        document.querySelector("#total").select();
+        return false;
+    } else {
+        document.querySelector("#price1").value = total;
+        document.querySelector("#price1").focus();
+        document.querySelector("#price1").select();
+        return false;
+    }
+}
+
+function checktotal() {
+    total = document.querySelector("#total").value;
+    if (parseInt(total, 10) == 0 || parseInt(total, 10) == "" || isNaN(parseInt(total, 10))) {
+        alert('총액을 입력해 주세요');
+        document.querySelector("#total").focus();
+        document.querySelector("#total").select();
+        return false;
+    }
+}
+
+function checkprice(c) {
+    var total = removecomma(document.querySelector("#total").value);
+    var price = removecomma(document.querySelector("#price"+c).value);
+    var unit1 = removecomma(document.querySelector("#unit"+c+"1").value);
+    var unit2 = removecomma(document.querySelector("#unit"+c+"2").value);
+
+    checktotal();
+
+    if (parseInt(price, 10) <= 0 || parseInt(price, 10) == '' || parseInt(price, 10) == null || isNaN(parseInt(price, 10))) {
+        alert('금액을 입력해 주세요');
+        document.querySelector("#price"+c).focus();
+        document.querySelector("#price"+c).select();
+        return false;
+    }
+
+    if (parseInt(unit1, 10) <= 0 || parseInt(unit1, 10) == '' || parseInt(unit1, 10) == null || isNaN(parseInt(unit1, 10))) {
+        alert('단가를 입력해 주세요');
+        document.querySelector("#unit"+c+"1").focus();
+        document.querySelector("#unit"+c+"1").select();
+        return false;
+    }
+
+    if (parseInt(unit2, 10) <= 0 || parseInt(unit2, 10) == '' || parseInt(unit2, 10) == null || isNaN(parseInt(unit2, 10))) {
+        alert('단가를 입력해 주세요');
+        document.querySelector("#unit"+c+"2").focus();
+        document.querySelector("#unit"+c+"2").select();
+        return false;
+    }
+
+    if (parseInt(total, 10) < parseInt(price, 10)) {
+        //console.log(parseInt(total, 10) + "," + parseInt(price, 10));
+        alert('금액을 올바르게 입력해 주세요');
+        document.querySelector("#price"+c).focus();
+        document.querySelector("#price"+c).select();
+        return false;
+    }
+
+    if (parseInt(price, 10) < parseInt(unit1, 10) || parseInt(unit1, 10) < parseInt(unit2, 10)) {
+        //console.log(parseInt(price, 10) + "," + parseInt(unit1, 10) + "," + parseInt(unit2, 10));
+        alert('단가를 올바르게 입력해 주세요');
+        document.querySelector("#unit"+c+"1").focus();
+        document.querySelector("#unit"+c+"1").select();
+        return false;
+    }
+    //document.querySelector("#result"+c).value = "";
+    var smptable = "<table><tr><td>단가(원)</td><td>수량(개)</td></tr>";
+    while (parseInt(unit2, 10) <= parseInt(unit1, 10)) {
+        
+        i = parseInt(price, 10) / parseInt(unit1, 10);
+        if (/^(\-|\+)?([0-9]+)$/.test(i) && parseInt(i, 10) > 0) {
+            //document.querySelector("#result"+c).value += String(unit1) + "원, " + String(i) + "개\n";
+            smptable += "<tr><td>" + String(unit1) + "</td><td>" + String(i) + "</td></tr>";
+        }
+        unit1 = unit1 - 10;
+    }
+    smptable += "</table>"
+    document.querySelector("#result"+c).innerHTML = smptable;
+}
+
+function makeprice1() {
+    var total = removecomma(document.querySelector("#total").value);
+    var price = removecomma(document.querySelector("#price1").value);
+
+    checktotal();
+
+    if (parseInt(price, 10) == 0 || parseInt(price, 10) == "" || isNaN(parseInt(price, 10))) {
+        alert('금액을 입력해 주세요');
+        document.querySelector("#price1").focus();
+        document.querySelector("#price1").select();
+        return false;
+    }
+
+    if (parseInt(price, 10) < parseInt(total, 10)) {
+        document.querySelector("#price2").value = parseInt(total, 10) - parseInt(price, 10);
+        document.querySelector("#price2").focus();
+        document.querySelector("#unit11").focus();
+    }
+}
+
+function makeprice2() {
+    var total = removecomma(document.querySelector("#total").value);
+    var price = removecomma(document.querySelector("#price1").value);
+    var price2 = removecomma(document.querySelector("#price2").value);
+
+    checktotal();
+
+    if (parseInt(price, 10) == 0 || parseInt(price, 10) == "" || isNaN(parseInt(price, 10))) {
+        alert('금액을 입력해 주세요');
+        document.querySelector("#price1").focus();
+        document.querySelector("#price1").select();
+        return false;
+    }
+
+    if (parseInt(price2, 10) == 0 || parseInt(price2, 10) == "" || isNaN(parseInt(price2, 10))) {
+        alert('금액을 입력해 주세요');
+        document.querySelector("#price2").focus();
+        document.querySelector("#price2").select();
+        return false;
+    }
+
+    if (parseInt(price, 10) + parseInt(price2, 10) < parseInt(total, 10)) {
+        document.querySelector("#price3").value = parseInt(total, 10) - parseInt(price, 10) - parseInt(price2, 10);
+        document.querySelector("#price3").focus();
+        document.querySelector("#unit21").focus();
+    }
+}
+</script>
+
+</head>
+
+<body onload="base()">
+
+<div id="container">
+<div id="header">
+    총액: <input type="text" name="total" id="total" value="" onkeyup="makecomma('total')" onblur="maketotal()" /> 원<br />
+</div>
+
+<div id="content1">
+    금액: <input type="text" name="price1" id="price1" value="" onkeyup="makecomma('price1')" onblur="makeprice1()" /> 원<br />
+    단가: <input type="text" name="unit11" id="unit11" value="" onkeyup="makecomma('unit11')" /> 원부터<br />
+    .....&nbsp;&nbsp;&nbsp; <input type="text" name="unit12" id="unit12" value="" onkeyup="makecomma('unit12')" /> 원까지<br />
+    <input type="button" name="button1" id="button1" value="계산하기" onclick="checkprice('1')" /><br />
+    <hr />
+    <!--textarea name="result1" id="result1" readonly></textarea-->
+    <layer name="result1" id="result1"></layer>
+</div>
+
+<div id="content2">
+    금액: <input type="text" name="price2" id="price2" value="" onkeyup="makecomma('price2')" onfocus="makecomma('price2')" onblur="makeprice2()" /> 원<br />
+    단가: <input type="text" name="unit21" id="unit21" value="" onkeyup="makecomma('unit21')" /> 원부터<br />
+    .....&nbsp;&nbsp;&nbsp; <input type="text" name="unit22" id="unit22" value="" onkeyup="makecomma('unit22')" /> 원까지<br />
+    <input type="button" name="button2" id="button2" value="계산하기" onclick="checkprice('2')" /><br />
+    <hr />
+    <!--textarea name="result2" id="result2" readonly></textarea-->
+    <layer name="result2" id="result2"></layer>
+</div>
+
+<div id="content3">
+    금액: <input type="text" name="price3" id="price3" value="" onkeyup="makecomma('price3')" onfocus="makecomma('price3')" /> 원<br />
+    단가: <input type="text" name="unit31" id="unit31" value="" onkeyup="makecomma('unit31')" /> 원부터<br />
+    .....&nbsp;&nbsp;&nbsp; <input type="text" name="unit32" id="unit32" value="" onkeyup="makecomma('unit32')" /> 원까지<br />
+    <input type="button" name="button3" id="button3" value="계산하기" onclick="checkprice('3')" /><br />
+    <hr />
+    <!--textarea name="result3" id="result3" readonly></textarea-->
+    <layer name="result3" id="result3"></layer>
+</div>
+
+</div>
+
+</body>
+</html>
