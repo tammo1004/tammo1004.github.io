@@ -40,3 +40,41 @@ $ wsl --list --verbose
 * Ubuntu-20.04    Stopped         2
 $ wsl --set-default-version 2
 ```
+
+### 10. git
+```
+$ git --version
+git version 2.25.1
+```
+
+### 11. VS Code
+Windows에서 설치… Extension: Remote-WSL, Remote-Containers, Docker
+WSL에서… $ code .
+
+### 12. Windows Terminal
+```
+"defaults":
+        {
+            // Put settings here that you want to apply to all profiles.
+            "fontFace": "Consolas",
+            "fontSize": 11
+        },
+        "list":
+        [
+            {
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "hidden": false,
+                "name": "Ubuntu-20.04",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                // Make changes here to the cmd.exe profile.
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceee452369}",
+                "name": "Anaconda Prompt",
+                "commandline": "cmd.exe \"/K\" C:\\Users\\PC\\anaconda3\\Scripts\\activate.bat C:\\Users\\PC\\anaconda3",
+                "startingDirectory" : "C:\\Users\\PC",
+                "icon":"%USERPROFILE%\\Anaconda3\\Menu\\anaconda-navigator.ico",
+                "hidden": false
+            }
+        ]
+```
