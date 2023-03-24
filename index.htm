@@ -6,7 +6,44 @@
 
 <body>
 
-Hello, World!
+<pre>
+WSL2
+
+$ passwd
+
+$ sudo apt update
+$ sudo apt upgrade
+$ sudo apt autoremove
+
+$ sudo apt install apache2
+$ sudo service apache2 start|stop|restart
+
+$ sudo apt install mysql-server
+$ sudo mysql_secure_installation
+
+Failed! Error: SET PASSWORD has no significance for user 'root'@'localhost'…
+$ sudo mysql
+mysql> ALTER USER ‘root’@’localhost’ IDENTIFIED WITH mysql_native_password by ‘@A123b456’;
+$ sudo mysql_secure_installation
+
+$ sudo apt install php libapache2-mod-php php-mysql
+$ apt list php-* php7.4-*
+$ sudo apt install php-{bz2,imagick,imap,intl,gd,mbstring,pspell,curl,readline,xml,xmlrpc,zip}
+
+/var/www/html
+<?php
+Phpinfo();
+?>
+Error: 500
+popsmtp@DESKTOP-0979H8H:/var/www/html$ sudo chown -R popsmtp .
+
+$ sudo service apache2 start|stop|restart
+/var/www/html/
+
+$ sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
+$ python3 -m pip install mysqlclient
+$ sudo service mysql start|stop|restart
+</pre>
 
 </body>
 </html>
