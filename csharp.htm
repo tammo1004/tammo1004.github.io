@@ -22,5 +22,30 @@ Console.WriteLine($"{i:C} {PI}");
 Console.WriteLine($"{dateTime:D}");
 </code></pre>
 
+<strong>null</strong>
+<pre><code>string? s = null;
+int? i = null;
+bool? b = null;
+int?[] arr = new int?[10];
+
+b = true;
+
+Nullable<int> n = null;
+n = 9;
+int x = n.Value;
+</code></pre>
+Nullable
+<pre><code>
+int? i = null;
+int? j = null;
+int result = Nullable.Compare<int>(i, j);
+Console.WriteLine(result);    // 0   *0 : True, 1 : False
+	
+double? x = 3.14;
+double? y = 3.1400;
+bool result2 = Nullable.Equals<double>(x, y);
+Console.WriteLine(result2);    // True
+</code></pre>
+
 </body>
 </html>
