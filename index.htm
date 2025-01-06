@@ -1,1 +1,39 @@
-Hello!!!
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="widht=device-with" />
+    <title></title>
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    </head>
+<body>
+    <pre><code class="language-html">class Sub
+{
+    private int[] data = new int[3];
+    public int this[int index]
+    {
+        get
+        {
+            if (index >= data.Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else
+            {
+                return data[index];
+            }
+        }
+        set
+        {
+            if (!(index >= data.Length))
+            {
+                data[index] = value;
+            }
+        }
+    }
+}</code></pre>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
