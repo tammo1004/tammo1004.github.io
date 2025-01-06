@@ -1,0 +1,6 @@
+pre code.hljs {
+    border-radius: 10px;
+    font-size: var(--body-normal-font-size);
+    font-family: Consolas, 'Courier New', Courier, monospace;
+    line-height: 1.2rem;
+}
